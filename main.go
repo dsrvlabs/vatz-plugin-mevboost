@@ -32,7 +32,7 @@ var (
 
 func init() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
-	flag.StringVar(&mevDockerName, "mev start", dockerContainer, "Please check your mev docker container name")
+	flag.StringVar(&mevDockerName, "mev-boost-version", dockerContainer, "Please check your mev docker container name")
 	flag.IntVar(&port, "port", defaultPort, "Port number, default 9095")
 
 	flag.Parse()
