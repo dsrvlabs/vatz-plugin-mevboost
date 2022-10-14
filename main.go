@@ -71,6 +71,10 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
 
+	if resp != nil {
+		defer resp.Body.Close()
+	}
+
 	ret := sdk.CallResponse{
 		FuncName:   "mev-boost-liveness",
 		Message:    msg,
@@ -78,8 +82,6 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		State:      state,
 		AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
 	}
-
-	resp.Body.Close()
 
 	return ret, nil
 }
