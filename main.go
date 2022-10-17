@@ -53,23 +53,20 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	severity := pluginpb.SEVERITY_INFO
 	state := pluginpb.STATE_NONE
 	var msg string
-	var hostname string
 	url := "http://localhost:18550/eth/v1/builder/status"
 
 	resp, err := http.Get(url)
 	if err != nil || resp.StatusCode != http.StatusOK {
 		severity = pluginpb.SEVERITY_CRITICAL
 		state = pluginpb.STATE_SUCCESS
-		hostname, _ = os.Hostname()
-		msg = fmt.Sprintf("[%s]mev-boost is down", hostname)
+		msg = fmt.Sprintf("mev-boost is down")
 		log.Error().Str("moudle", "plugin").Msg(msg)
 		exec_command("docker stop " + mevDockerName)
 		exec_command("docker start " + mevDockerName)
 	} else {
 		severity = pluginpb.SEVERITY_INFO
 		state = pluginpb.STATE_SUCCESS
-		hostname, _ = os.Hostname()
-		msg = fmt.Sprintf("[%s]mev-boost is alive", hostname)
+		msg = fmt.Sprintf("mev-boost is alive")
 		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
 
