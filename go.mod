@@ -1,4 +1,4 @@
-module mevboost-monitor
+module github.com/dsrvlabs/vatz-plugin-mevboost
 
 go 1.19
 
